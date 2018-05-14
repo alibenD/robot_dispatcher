@@ -136,10 +136,58 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    static int status = 1;
+    switch(status)
+    {
+      case 1:
+        if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1)
+        {
+          status = 2;
+        }
+        else
+        {
+          status = 1;
+        }
+        break;
+      case 2:
+        if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1)
+        {
+          status = 3;
+          HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_SET);
+        }
+        else
+        {
+          status = 1;
+        }
+        break;
+      case 3:
+        if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 0)
+        {
+          status = 4;
+        }
+        else
+        {
+          status = 1;
+        }
+        break;
+      case 4:
+        if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 0)
+        {
+          HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_RESET);
+        }
+        status = 1;
+        break;
+      default:
+        status = 1;
+        break;
+    }
 
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
+    
+  //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_SET);
 
   }
   /* USER CODE END 3 */
