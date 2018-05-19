@@ -56,6 +56,7 @@ TIM_HandleTypeDef htim1;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_NVIC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -96,7 +97,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM1_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim1);
 
   /* USER CODE END 2 */
 
@@ -217,6 +222,17 @@ void SystemClock_Config(void)
 
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM1_UP_TIM10_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 }
 
 /* TIM1 init function */

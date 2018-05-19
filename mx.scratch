@@ -9,20 +9,6 @@
 
 <filestoremove>
     <file>
-    <name>Src/stm32f4xx_hal_timebase_TIM.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc_ex.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dsi.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c</name>
-    <name>Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c</name>
     </file>
 </filestoremove>
 
