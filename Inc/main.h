@@ -64,6 +64,7 @@
 /* #define USE_FULL_ASSERT    1U */
 
 /* USER CODE BEGIN Private defines */
+extern void* task_mgr_ptr;
 
 /* USER CODE END Private defines */
 
