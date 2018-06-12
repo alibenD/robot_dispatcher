@@ -36,7 +36,8 @@
 #include "stm32f4xx_it.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "main.h"
+#include "scheduler.h"
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -100,12 +101,12 @@ void SysTick_Handler(void)
 void TIM1_UP_TIM10_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
-  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET);
-
+  //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET);
+  extern Task_MGR task_mgr;
   /* USER CODE END TIM1_UP_TIM10_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
   /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 1 */
-
+  scheduler_update(&task_mgr);
   /* USER CODE END TIM1_UP_TIM10_IRQn 1 */
 }
 
