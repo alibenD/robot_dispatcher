@@ -57,6 +57,7 @@ TIM_HandleTypeDef htim1;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_NVIC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -64,7 +65,7 @@ static void MX_TIM1_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-int turn_on_LED4(void* p_ptr)
+int turn_on_LED3(void* p_ptr)
 {
   HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_SET);
   return 0;
@@ -73,6 +74,18 @@ int turn_on_LED4(void* p_ptr)
 int turn_off_LED3(void* p_ptr)
 {
   HAL_GPIO_WritePin(GPIOG, GPIO_PIN_13, GPIO_PIN_RESET);
+  return 0;
+}
+
+int turn_on_LED4(void* p_ptr)
+{
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_SET);
+  return 0;
+}
+
+int turn_off_LED4(void* p_ptr)
+{
+  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_14, GPIO_PIN_RESET);
   return 0;
 }
 
@@ -94,22 +107,40 @@ int main(void)
 
   Task task1;
   task1.task_id_=1;
-  task1.task_ptr=turn_on_LED4;
+  task1.task_ptr=turn_on_LED3;
   task1.is_running_ = 0;
   task1.is_repeat_ = 1;
   task1.msec_delay_ = 0;
-  task1.repeat_period_ = 20;
+  task1.repeat_period_ = 2000;
 
   Task task2;
   task2.task_id_=2;
   task2.task_ptr=turn_off_LED3;
   task2.is_running_ = 0;
   task2.is_repeat_ = 1;
-  task2.msec_delay_ = 10;
-  task2.repeat_period_ = 20;
+  task2.msec_delay_ = 1000;
+  task2.repeat_period_ = 2000;
+
+  Task task3;
+  task3.task_id_=3;
+  task3.task_ptr=turn_on_LED4;
+  task3.is_running_ = 0;
+  task3.is_repeat_ = 1;
+  task3.msec_delay_ = 1000;
+  task3.repeat_period_ = 2000;
+
+  Task task4;
+  task4.task_id_=4;
+  task4.task_ptr=turn_off_LED4;
+  task4.is_running_ = 0;
+  task4.is_repeat_ = 1;
+  task4.msec_delay_ = 2000;
+  task4.repeat_period_ = 2000;
 
   push_task(&task_mgr, &task1);
   push_task(&task_mgr, &task2);
+  push_task(&task_mgr, &task3);
+  push_task(&task_mgr, &task4);
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -131,6 +162,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM1_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   //HAL_TIM_Base_Start_IT(&htim1);
   if(HAL_TIM_Base_Start_IT(&htim1) != HAL_OK)
@@ -268,6 +302,17 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM1_UP_TIM10_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
+}
+
 /* TIM1 init function */
 static void MX_TIM1_Init(void)
 {
@@ -276,11 +321,11 @@ static void MX_TIM1_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig;
 
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 179;
+  htim1.Init.Prescaler = 0;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 1000;
+  htim1.Init.Period = 18000;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.RepetitionCounter = 10;
   if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -337,16 +382,16 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  static int count = 0;
-  if(count == 100)
-  {
-    HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13);
-    count = 0;
-  }
-  count++;
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+//  static int count = 0;
+//  if(count == 100)
+//  {
+//    HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_13);
+//    count = 0;
+//  }
+//  count++;
+//}
 /* USER CODE END 4 */
 
 /**
