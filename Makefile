@@ -59,7 +59,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c \
-/Users/aliben/project/C/c_scheduler/src/scheduler.c \
+~/project/C/c_scheduler/src/scheduler.c \
 Src/main.c \
 /Src/system_stm32f4xx.c \
 Src/stm32f4xx_it.c \
