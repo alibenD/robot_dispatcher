@@ -124,7 +124,7 @@ C_INCLUDES =  \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
--I/Users/aliben/project/C/c_scheduler/include \
+-I~/project/C/c_scheduler/include \
 -IInc
 
 
