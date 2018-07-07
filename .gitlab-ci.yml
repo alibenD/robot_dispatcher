@@ -4,6 +4,8 @@
 # see https://hub.docker.com/_/gcc/
 image: aliben/stm32_ci
 before_script:
+    - mkdir -p ~/project/C
+    - git clone git@gitlab.aliben-develop.com:aliben/c_scheduler.git ~/project/C/c_scheduler
 
 build:
   stage: build
